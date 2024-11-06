@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.prueba.backend.repository.TaskMapper">
+
+    <select id="listTasks" resultType="com.prueba.backend.model.Task">
+        SELECT id, name, description, start_date AS startDate
+        FROM tasks
+    </select>
+
+    <insert id="insertTask" parameterType="com.prueba.backend.model.Task">
+        INSERT INTO tasks (name, description, start_date)
+        VALUES (#{name}, #{description}, #{startDate})
+    </insert>
+
+</mapper>
