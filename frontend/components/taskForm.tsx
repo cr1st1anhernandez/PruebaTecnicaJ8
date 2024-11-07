@@ -1,5 +1,5 @@
 "use client";
-import { CalendarDate } from "@internationalized/date";
+import { parseDate } from "@internationalized/date";
 import { Button } from "@nextui-org/button";
 import { DateInput } from "@nextui-org/date-input";
 import { Input, Textarea } from "@nextui-org/input";
@@ -19,6 +19,7 @@ import { toast } from "sonner";
 export default function TaskForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
+  const [startDate, setStartDate] = useState(parseDate("2024-04-04"));
   const [task, setTask] = useState({
     name: "",
     description: "",
@@ -85,19 +86,8 @@ export default function TaskForm() {
                 <DateInput
                   label="Fecha de inicio"
                   className="max-w-sm"
-                  onChange={(date) =>
-                    setTask((prev) => ({ ...prev, startDate: date.toString() }))
-                  }
-                  placeholderValue={new CalendarDate(2024, 11, 6)}
-                  value={
-                    task.startDate
-                      ? new CalendarDate(
-                          new Date(task.startDate).getFullYear(),
-                          new Date(task.startDate).getMonth() + 1,
-                          new Date(task.startDate).getDate()
-                        )
-                      : new CalendarDate(2024, 11, 6)
-                  }
+                  onChange={setStartDate}
+                  value={startDate}
                 />
                 <div className="flex py-2 px-1 justify-between">
                   <Link color="primary" href="/tasks" size="sm">
